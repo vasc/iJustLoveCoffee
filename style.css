@@ -1,0 +1,49 @@
+@font-face { font-family: "Starguides"; src: url("fonts/starguides.ttf");}
+@font-face { font-family: "Whatever"; src: url("fonts/whatever.ttf");}
+@font-face { font-family: "My Turtle"; src: url("fonts/myturtle.ttf");}
+@font-face { font-family: "Coffee"; src: url("fonts/coffee.ttf");}
+@font-face { font-family: "Earwax Witt"; src: url("fonts/earwaxwit.ttf");}
+
+body{font-family: Georgia, sans; font-size: 1em; color: #424242; /*background-image: url(images/bg.jpg);*/ background-color:#F8F8F8; font-variant: small-caps;}
+h1{margin: 30px 0px; clear:both;}
+ul{list-style-type: none; padding: 0px; margin: 0 0 0 12px;}
+em{color: #DB5C6B; font-style: normal; font-weight: bold;}
+a img{border-width: 0px}
+.blank{clear:both;}
+
+//#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 44px; float:left; background-color: #424242; background-image:url(images/heart-small.png); background-repeat:no-repeat; background-position: 8px center; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
+#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 12px; float:left; background-color: #424242; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
+
+
+#wrapper{clear:left; margin: 0 auto; width: 755px;}
+#main{margin:10px 0px 30px 0px; float:left;}
+#coffee{margin-bottom: 60px;}
+#wall{width: 545px;}
+#wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 24px;}
+#wall .dedication .to{font-weight:bold;}
+#wall .dedication .extra{float:right; font-size:0.8em; color: #828282;}
+#wall .dedication .extra a{text-decoration: none; color: #727272; font-weight:bold;}
+#wall .dedication .extra a:hover{text-decoration: underline;}
+#wall .dedication em{}
+#footer{/*width:72px;*/ padding 12px 12px; margin:70px 0px 30px 80px; clear:both;}
+.bookmark{margin: 0 0; float:left;}
+.bookmark img{vertical-align: middle;}
+.bookmark span{color:#727272 ;font-size: 0.8em; font-variant:normal; font-weight:regular; /*background-color: #424242;*/ padding: 0px 12px; margin: 0 24px 0 4px;}
+.bookmark div{text-align:center;}
+.bookmark a{text-decoration:none; color: #727272;}
+.bookmark a:hover{font-weight:bold;}
+
+#sidebar{width: 150px; margin-left:60px; float:left;}
+#sidebar .box{width:150px;}
+.box{background-color:#F4F4F4; border: solid 1px #E2E2E2; color: #727272; padding: 0px 20px; font-variant:normal; font-size: 0.7em; margin-bottom:24px;}
+#social{padding:0px 20px 20px 20px;}
+#social img{margin: 8px 12px;}
+#about a{color: #DB5C6B; font-style: normal; font-weight: bold;}
+#heart{height: 100px; /*background-image:url(images/heart-empty.png); background-position: center; background-repeat:no-repeat;*/}
+#heart:hover{/* background-image:url(images/heart.png)*/}
+#heart span{/*display:none;*/}
+
+a #heart:{text-decoration: none;}
+#heart span{font-size:90px; color:#424242;}
+#heart span:hover{color:#DB5C6B;}
+
