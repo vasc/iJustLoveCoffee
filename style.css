@@ -11,8 +11,8 @@ em{color: #DB5C6B; font-style: normal; font-weight: bold;}
 a img{border-width: 0px}
 .blank{clear:both;}
 
-//#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 44px; float:left; background-color: #424242; background-image:url(images/heart-small.png); background-repeat:no-repeat; background-position: 8px center; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
-#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 12px; float:left; background-color: #424242; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
+#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 44px; float:left; background-color: #424242; background-image:url(images/heart-small.png); background-repeat:no-repeat; background-position: 8px center; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
+//#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 12px; float:left; background-color: #424242; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
 
 
 #wrapper{clear:left; margin: 0 auto; width: 755px;}
@@ -39,9 +39,9 @@ a img{border-width: 0px}
 #social{padding:0px 20px 20px 20px;}
 #social img{margin: 8px 12px;}
 #about a{color: #DB5C6B; font-style: normal; font-weight: bold;}
-#heart{height: 100px; /*background-image:url(images/heart-empty.png); background-position: center; background-repeat:no-repeat;*/}
-#heart:hover{/* background-image:url(images/heart.png)*/}
-#heart span{/*display:none;*/}
+#heart{height: 100px; background-image:url(images/heart-empty.png); background-position: center; background-repeat:no-repeat;}
+#heart:hover{background-image:url(images/heart.png)}
+#heart span{display:none;}
 
 a #heart:{text-decoration: none;}
 #heart span{font-size:90px; color:#424242;}
