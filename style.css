@@ -1,10 +1,6 @@
-@font-face { font-family: "Starguides"; src: url("fonts/starguides.ttf");}
-@font-face { font-family: "Whatever"; src: url("fonts/whatever.ttf");}
-@font-face { font-family: "My Turtle"; src: url("fonts/myturtle.ttf");}
-@font-face { font-family: "Coffee"; src: url("fonts/coffee.ttf");}
-@font-face { font-family: "Earwax Witt"; src: url("fonts/earwaxwit.ttf");}
 
 body{font-family: Georgia, sans; font-size: 1em; color: #424242; /*background-image: url(images/bg.jpg);*/ background-color:#F8F8F8; font-variant: small-caps;}
+a{color:inherit; text-decoration: inherit;}
 h1{margin: 30px 0px; clear:both;}
 ul{list-style-type: none; padding: 0px; margin: 0 0 0 12px;}
 em{color: #DB5C6B; font-style: normal; font-weight: bold;}

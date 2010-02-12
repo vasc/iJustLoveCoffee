@@ -6,6 +6,7 @@
 import re
 import cgi
 import cgitb
+import render
  
 def dispatch(path, rules):
     for rule in rules:
@@ -14,21 +15,17 @@ def dispatch(path, rules):
         if(r):
             dest(**r.groupdict())
             return
-    page_404(path)
+    render.page_404()
  
- 
-def page_404(path):
-    print 'Status: 404 Not Found'
-    print 'Content-type: text/plain'
-    print
-    print '404 ' + str(path)
-
  
 cgitb.enable() 
 form = cgi.FieldStorage()
-
 path = ''
-if isinstance(form['path'], list):
-    path = form['path'][1].value
+if 'path' in form:
+    path = form['path'].value
 
-dispatch(form, [])
+rules = [ {'re': r'^$', 'dest': render.main},
+          {'re': r'^page/(?P<page>\d+)', 'dest': render.main},
+          {'re': r'^d/(?P<dedication>\d+)', 'dest': render.single}]
+
+dispatch(path, rules)
