@@ -36,8 +36,8 @@ a img{border-width: 0px}
 #sidebar{width: 150px; margin-left:60px; float:left;}
 #sidebar .box{width:150px;}
 .box{background-color:#F4F4F4; border: solid 1px #E2E2E2; color: #727272; padding: 0px 20px; font-variant:normal; font-size: 0.7em; margin-bottom:24px;}
-#social{padding:0px 20px 20px 20px;}
-#social img{margin: 8px 12px;}
+.social{padding:0px 20px 20px 20px;}
+.social img{margin: 8px 12px;}
 #about a{color: #DB5C6B; font-style: normal; font-weight: bold;}
 #heart{height: 100px; background-image:url(images/heart-empty.png); background-position: center; background-repeat:no-repeat;}
 #heart:hover{background-image:url(images/heart.png)}

@@ -1,0 +1,11 @@
+Options +ExecCGI
+AddHandler cgi-script py cgi
+
+ErrorDocument 404 /web/
+
+RewriteEngine On
+
+RewriteBase   /web/ijustlovecoffee
+
+
+RewriteRule   ^(.*)$  paths.py?path=$1 [QSA]
