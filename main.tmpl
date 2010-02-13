@@ -7,10 +7,13 @@
 <link rel="icon" href="images/favicon.ico" /> 
 </head>
 <body>
- <div id="header">iJustLoveCoffee</div>
+ <div id="header"><a href="/web/ijustlovecoffee/"><div id="logo">iJustLoveCoffee</div></a><a href="#dedication-form"><div id="dedicate-button">Dedicate it to a special someone »</div></a></div> 
  <div id="wrapper">
   <div id="main">
    <div id="coffee">
+    <div class="wall">
+     $single
+    </div>
     <h1><b>T</b>hings I <em>Like About Coffee</em></h1>
     <ul>
      <li>Coffee is Hot</li>
@@ -27,8 +30,19 @@
      <li>And who knows, Maybe <em>you</em> Taste Good & keep me up all Night, too.</li>
     </ul>
    </div>
-   <div id="wall">
+   <div class="wall">
     $dedications
+    <div id="form" class="dedication box">
+     <a name="dedication-form"></a>
+     <form action="/web/ijustlovecoffee/add-dedication/" method="post">
+     <p><label>to:</label> <input type="text" name="to" /> <span class="extra">who is that special someone?</span></p>
+     <p><label>from:</label> <input type="text" name="_from" /> <span class="extra">who are you?</span></p>
+     <textarea rows="10" cols="68" name="dedication"></textarea>
+     <p id="submit-line">you only have <em>360</em> characters left, use them wisely.<button type="submit">Dedicate</button></p>
+     <div class="blank"></div>
+     </form>
+     <div class="blank"></div>
+    </div>
    </div>
   </div> 
   <div id="sidebar">
@@ -45,18 +59,18 @@
    </div>
    <div id="follow" class="box social">
     <p><b>follow:</b></p>
-    <div class="bookmark"><a href="feed/"><img src="images/rss-48.png" title="tweet this!" /><div>feed</div></a></div>
-    <div class="bookmark"><a href="#"><img src="images/twitter-follow-48.png" title="bookmark this!" /><div>follow</div></a></div>
+    <div class="bookmark"><a href="feed/"><img src="/web/ijustlovecoffee/images/rss-48.png" title="tweet this!" /><div>feed</div></a></div>
+    <div class="bookmark"><a href="#"><img src="/web/ijustlovecoffee/images/twitter-follow-48.png" title="bookmark this!" /><div>follow</div></a></div>
     <div class="blank"></div>
    </div>
    <div id="share" class="box social">
     <p><b>share:</b></p>
-    <div class="bookmark"><a href="http://twitter.com/home?status=i%20really%20love%20coffee%20:)%20http://ijustlove.com"><img src="images/twitter-48.png" title="tweet this!" /><div>tweet</div></a></div>
-    <div class="bookmark"><a href="http://del.icio.us/post?url=http://ijustlove.com/&title=I%20Just%20Love"><img src="images/delicious-48.png" title="bookmark this!" /><div>delicious</div></a></div>
-    <div class="bookmark"><a href="http://www.facebook.com/sharer.php?u=http://ijustlove.com/&t=I%20Just%20Love"><img src="images/facebook-48.png" title="update status!" /><div>facebook</div></a></div>
-    <div class="bookmark"><a href="http://www.stumbleupon.com/submit?url=http://ijustlove.com/"><img src="images/stumbleupon-48.png" title="stumble here!" /><div>stumble</div></a></div>
-    <div class="bookmark"><a href="http://digg.com/submit?phase=2&url=http://ijustlove.com/"><img src="images/digg-48.png" title="digg this!" /><div>digg</div></a></div>
-    <div class="bookmark"><a href="http://reddit.com/submit?url=http://ijustlove.com/&title=I%20Just%20Love"><img src="images/reddit-48.png" title="submit to reddit!" /><div>reddit</div></a></div>
+    <div class="bookmark"><a href="http://twitter.com/home?status=i%20really%20love%20coffee%20:)%20http://ijustlove.com"><img src="/web/ijustlovecoffee/images/twitter-48.png" title="tweet this!" /><div>tweet</div></a></div>
+    <div class="bookmark"><a href="http://del.icio.us/post?url=http://ijustlove.com/&title=I%20Just%20Love"><img src="/web/ijustlovecoffee/images/delicious-48.png" title="bookmark this!" /><div>delicious</div></a></div>
+    <div class="bookmark"><a href="http://www.facebook.com/sharer.php?u=http://ijustlove.com/&t=I%20Just%20Love"><img src="/web/ijustlovecoffee/images/facebook-48.png" title="update status!" /><div>facebook</div></a></div>
+    <div class="bookmark"><a href="http://www.stumbleupon.com/submit?url=http://ijustlove.com/"><img src="/web/ijustlovecoffee/images/stumbleupon-48.png" title="stumble here!" /><div>stumble</div></a></div>
+    <div class="bookmark"><a href="http://digg.com/submit?phase=2&url=http://ijustlove.com/"><img src="/web/ijustlovecoffee/images/digg-48.png" title="digg this!" /><div>digg</div></a></div>
+    <div class="bookmark"><a href="http://reddit.com/submit?url=http://ijustlove.com/&title=I%20Just%20Love"><img src="/web/ijustlovecoffee/images/reddit-48.png" title="submit to reddit!" /><div>reddit</div></a></div>
     <div class="blank"></div>
    </div>
   </div>

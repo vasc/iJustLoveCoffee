@@ -7,4 +7,4 @@ RewriteEngine On
 RewriteBase   /web/ijustlovecoffee
 
 RewriteCond  %{REQUEST_FILENAME}      !-s
-RewriteRule   ^(.*)$  paths.py?path=$1 [QSA]
+RewriteRule   ^(.*)$  paths.py?path=$1  [QSA]

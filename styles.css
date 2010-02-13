@@ -7,20 +7,43 @@ em{color: #DB5C6B; font-style: normal; font-weight: bold;}
 a img{border-width: 0px}
 .blank{clear:both;}
 
-#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 44px; float:left; background-color: #424242; background-image:url(images/heart-small.png); background-repeat:no-repeat; background-position: 8px center; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
-//#header{margin:30px 0px 30px 80px; padding:12px 20px 8px 12px; float:left; background-color: #424242; color:#FFF; font-weight:bold; font-size: 1.3em; font-variant: normal;}
-
+#header{margin:30px 0px 30px 80px;  float:left; color:#FFF; font-weight:bold; font-variant: normal;}
+#logo{
+  padding:12px 20px 8px 44px;
+  background-color: #424242;
+  background-image:url(images/heart-small.png);
+  background-repeat:no-repeat;
+  background-position: 8px center;
+  font-size: 1.3em;
+}
+#dedicate-button{
+  background-color:#DB5C6B;
+  margin-right:0px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.7em;
+}
 
 #wrapper{clear:left; margin: 0 auto; width: 755px;}
 #main{margin:10px 0px 30px 0px; float:left;}
 #coffee{margin-bottom: 60px;}
-#wall{width: 545px;}
-#wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 24px;}
-#wall .dedication .to{font-weight:bold;}
-#wall .dedication .extra{float:right; font-size:0.8em; color: #828282;}
-#wall .dedication .extra a{text-decoration: none; color: #727272; font-weight:bold;}
-#wall .dedication .extra a:hover{text-decoration: underline;}
-#wall .dedication em{}
+.wall{width: 545px;}
+.wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 24px;}
+.wall .dedication .to{font-weight:bold;}
+.wall .dedication .extra{float:right; font-size:0.8em; color: #828282;}
+.wall .dedication .extra a{text-decoration: none; color: #727272; font-weight:bold;}
+.wall .dedication .extra a:hover{text-decoration: underline;}
+/*#wall .dedication.box:hover{background-color:#E9E9E9;}*/
+
+input, textarea{border: solid 1px #E2E2E2; font-weight: normal; font-size: 11px;}
+textarea{resize: vertical;} 
+input:focus{border-color: #DB5C6B;} 
+form label{width: 40px; display:block; float:left; padding-top: 4px;}
+.button{padding: 8px 20px; float:right; font-weight: bold; font-size: 14px; color:white; cursor:pointer; border: solid 1px #E2E2E2; background-color: #DB5C6B;}
+#form button{float:right; color:#333; margin-top: -5px;}
+#submit-line{padding: 4px 0px;}
+
+
 #footer{/*width:72px;*/ padding 12px 12px; margin:70px 0px 30px 80px; clear:both;}
 .bookmark{margin: 0 0; float:left;}
 .bookmark img{vertical-align: middle;}
