@@ -5,6 +5,7 @@ import MySQLdb
 import random
 import ConfigParser
 from datetime import datetime
+import re
 
 def base_host():
     config = ConfigParser.RawConfigParser()
@@ -45,19 +46,23 @@ def main(page = 1, user = None, _pass = None):
     dedications = ''
     for row in cursor:
         dedications += Template(dedication).safe_substitute(row)
-
+    
+    dedications = re.sub(r'<3', "<img src='/web/ijustlovecoffee/images/heartinline.png' />", dedications)
     main = Template(main).safe_substitute(dedications = dedications, single = '')
+    
     send_html(main)
 
 
-def single(d_id):
+def single(d_id, user = None, _pass = None):
     main_file = open('main.tmpl', 'r')
     main = main_file.read()
     dedication_file = open('dedication.tmpl', 'r')
     dedication = dedication_file.read()
+    dedication = show_deletion(user, _pass, dedication)
     cursor = mysql_cursor()
     cursor.execute("SELECT * FROM dedications WHERE id = %s", d_id)
     dedication_html = Template(dedication).safe_substitute(cursor.fetchone())
+    dedication_html = re.sub(r'<3', "<img src='/web/ijustlovecoffee/images/heartinline.png' />", dedication_html)
     main_html = Template(main).safe_substitute(dedications = '', single = dedication_html)
     send_html(main_html)
 
@@ -96,6 +101,20 @@ def add_dedication(_from, to, dedication):
     cursor.execute("INSERT INTO dedications (_from, _to, dedication, secret, pub_date)  Values (%s, %s, %s, %s, NOW())", (_from, to, dedication, r))
     send_html(cursor)
 
+def edit_dedication(id, secret, _from = None, to = None, dedication = None):
+    cursor = mysql_cursor()
+    if _from:
+        cursor.execute("""UPDATE dedications
+                          SET _from=%s
+                          WHERE id=%s AND secret=%s""", (_from, id, secret))
+    if to:
+        cursor.execute("""UPDATE dedications
+                          SET to=%s
+                          WHERE id=%s AND secret=%s""", (to, id, secret))
+    if dedication:
+        cursor.execute("""UPDATE dedications
+                          SET dedication=%s
+                          WHERE id=%s AND secret=%s""", (dedication, id, secret))
 
 def del_dedication(id, secret):
     cursor = mysql_cursor()
