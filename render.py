@@ -1,11 +1,12 @@
-from string import Template
+from google.appengine.ext import webapp
+from google.appengine.ext import db
+from google.appengine.ext.webapp import template
+from google.appengine.api import users
 import os
-os.environ['PYTHON_EGG_CACHE'] = '/tmp'
-import MySQLdb
 import random
-import ConfigParser
 from datetime import datetime
 import re
+import model
 
 def base_host():
     config = ConfigParser.RawConfigParser()
@@ -28,43 +29,96 @@ def show_deletion(user, _pass, dedication_template):
         dedication = Template(dedication_template).safe_substitute({'delete_link': ''})
     return dedication
 
+def get_likes():
+    l = model.Likes.get_or_insert(key_name='likes', value=0)
+    return l
 
-def main(page = 1, user = None, _pass = None):
-    if not isinstance(page, int) or page < 1:
-        page = 1
-    main_file = open('main.tmpl', 'r')
-    main = main_file.read()
-    dedication_file = open('dedication.tmpl', 'r')
-    dedication = dedication_file.read()
-    dedication = show_deletion(user, _pass, dedication)
-    cursor = mysql_cursor()    
-    limit = ((page-1)*10,)
-    cursor.execute("""SELECT * FROM dedications 
-                      WHERE deleted=FALSE
-                      ORDER BY id DESC
-                      LIMIT %s, 10""", limit)
-    dedications = ''
-    for row in cursor:
-        dedications += Template(dedication).safe_substitute(row)
-    
-    dedications = re.sub(r'<3', "<img src='/web/ijustlovecoffee/images/heartinline.png' />", dedications)
-    main = Template(main).safe_substitute(dedications = dedications, single = '')
-    
-    send_html(main)
+class Like(webapp.RequestHandler):
+    def get(self):
+        l = get_likes()
+        l.value += 100000
+        l.put()
+        self.redirect('/')
+
+class MainPage(webapp.RequestHandler):
+    def get(self, page = 1):
+        page = int(page)
+        if page < 1:
+            page = 1
+        self.response.headers['Content-Type'] = 'text/html'
+        dedications = db.GqlQuery("SELECT * FROM Dedication WHERE deleted=False ORDER BY pub_date DESC LIMIT 10")
+        template_values = {
+            'dedications': dedications,
+            'likes': get_likes().value,
+            }
+        if users.is_current_user_admin():
+            template_values['delete_links'] = True
+        path = os.path.join(os.path.dirname(__file__), 'main.tmpl')
+        self.response.out.write(template.render(path, template_values))
+
+class AddDedication(webapp.RequestHandler):
+    def post(self):
+        if self.request.get('body') and self.request.get('from_name') and self.request.get('to_name'):
+            ded = model.Dedication(body = self.request.get('body'),
+                                   from_name = self.request.get('from_name'),
+                                   to_name = self.request.get('to_name'),
+                                   secret = random.randint(1000000, 10000000))
+            ded.put()
+        self.redirect('/')
+
+class Delete(webapp.RequestHandler):
+    def get(self, key, secret):
+        if users.is_current_user_admin():
+            secret = int(secret)
+            ded = db.get(key)
+            if ded.secret == secret:
+                ded.deleted = True
+                ded.put()
+        self.redirect('/')
+
+class SignIn(webapp.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            self.redirect('/')
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
+
+class SignOut(webapp.RequestHandler):
+    def get(self):    
+        self.redirect(users.create_logout_url('/'))
+
+class Single(webapp.RequestHandler):
+    def get(self, d_id):
+        self.response.headers['Content-Type'] = 'text/html'
+        try:
+            key = db.Key(d_id)
+        except:
+            self.redirect('/')
+            return
+        single = db.get(key)
+        path = os.path.join(os.path.dirname(__file__), 'main.tmpl')
+        template_values = {
+            'single': single,
+            'likes': 3,
+            }
+        if users.is_current_user_admin():
+            template_values['delete_links'] = True
+        self.response.out.write(template.render(path, template_values))
+        #dedication_html = re.sub(r'<3', "<img src='/web/ijustlovecoffee/images/heartinline.png' />", dedication_html)
 
 
-def single(d_id, user = None, _pass = None):
-    main_file = open('main.tmpl', 'r')
-    main = main_file.read()
-    dedication_file = open('dedication.tmpl', 'r')
-    dedication = dedication_file.read()
-    dedication = show_deletion(user, _pass, dedication)
-    cursor = mysql_cursor()
-    cursor.execute("SELECT * FROM dedications WHERE id = %s", d_id)
-    dedication_html = Template(dedication).safe_substitute(cursor.fetchone())
-    dedication_html = re.sub(r'<3', "<img src='/web/ijustlovecoffee/images/heartinline.png' />", dedication_html)
-    main_html = Template(main).safe_substitute(dedications = '', single = dedication_html)
-    send_html(main_html)
+class Feed(webapp.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/rss+xml'
+        items = db.GqlQuery("SELECT * FROM Dedication ORDER BY pub_date DESC LIMIT 3")
+        template_values = {
+            'items': items,
+            'link': 'http://ijustlovecoffee.com/feed/',
+            'last_build_date': max(items, key=lambda x: x.pub_date)
+            }
+        path = os.path.join(os.path.dirname(__file__), 'rss.tmpl')
+        self.response.out.write(template.render(path, template_values))
 
 
 def feed(user = None, _pass = None):
@@ -93,13 +147,6 @@ def feed(user = None, _pass = None):
     main = Template(main).safe_substitute(items = items, link = 'http://ijustlovecoffee.com/feed/', time = time)
     send_html(main, 'application/rss+xml')
 
-
-
-def add_dedication(_from, to, dedication):
-    r = random.randint(1000000, 10000000)
-    cursor = mysql_cursor()
-    cursor.execute("INSERT INTO dedications (_from, _to, dedication, secret, pub_date)  Values (%s, %s, %s, %s, NOW())", (_from, to, dedication, r))
-    send_html(cursor)
 
 def edit_dedication(id, secret, _from = None, to = None, dedication = None):
     cursor = mysql_cursor()

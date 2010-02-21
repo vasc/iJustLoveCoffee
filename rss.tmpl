@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"  xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+  <atom:link href="{{ link }}" rel="self" type="application/rss+xml" />
+  <title>Dedications</title>
+  <link>{{ link }}</link>
+  <description>Dedications from ijustlovecoffee.com</description>
+  <lastBuildDate>{{ last_build_date.iso_date }}</lastBuildDate>
+  <language>en-us</language>
+  {% for item in items%}
+   <item>
+   <title><![CDATA[ From {{ item.from_name }} to {{ item.to_name }} ]]></title>
+   <link>{{ item.link }}</link>
+   <guid>{{ item.link }}</guid>
+   <pubDate>{{ item.iso_date }}</pubDate>
+   <description><![CDATA[ {{ item.body }} ]]></description>
+   </item>
+  {% endfor %}
+ </channel>
+</rss>
