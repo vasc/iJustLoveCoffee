@@ -5,13 +5,17 @@
 <title>iJustLoveCoffee</title>
 <link href="/media/style.css" rel="stylesheet" type="text/css" />
 <link rel="icon" href="/media/images/favicon.ico" />
-<script type="text/javascript" src="http://use.typekit.com/cdm8jra.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="/media/js/script.js"></script>
 </head>
 <body>
  <div id="header">
    <div id="menu">
+   {% if not user %}
     sign in with <a href="/signin/"><em>google</em></a>
+   {% else %}
+    hi {{ user.nickname }}, <a href="/signout/"><em>sign out</em> if you must :(</a>
+   {% endif %}
    </div>
    <div id="badge">
      <a href="/">
@@ -73,30 +77,41 @@
       </div>
      {% endfor %}
     {% endif %}
+
+    {% if user %}
     <div id="form" class="dedication box">
      <a name="dedication-form"></a>
      <form action="/add-dedication/" method="post">
-     <p><label>to:</label> <input type="text" name="to_name" /> <span class="extra">who is that special someone?</span></p>
-     <p><label>from:</label> <input type="text" name="from_name" /> <span class="extra">who are you?</span></p>
+     <p><label>to:</label> <input type="text" name="to_name" maxlength="40" /> <span class="extra">who is that special someone?</span></p>
+     <p><label>from:</label> <input type="text" name="from_name" maxlength="40" /> <span class="extra">who are you?</span></p>
      <textarea rows="10" cols="68" name="body"></textarea>
-     <p id="submit-line">you only have <em>360</em> characters left, use them wisely.<button type="submit">Dedicate</button></p>
+     <p id="submit-line">you only have <em id="chars">360</em> characters left, use them wisely.<button type="submit">Dedicate</button></p>
      <div class="blank"></div>
      </form>
      <div class="blank"></div>
     </div>
+    {% else %}
+    <div class="dedication box">sign in with <a href="/signin/"><em>google</em></a> to write your own dedication</div>
+    {% endif %}
    </div>
   </div>
   <div id="sidebar">
    <div id="about" class="box">
     <p><b>about:</b></p>
     <p>based on original <a href="/media/images/drawing.jpg">concept</a> by unknown artist</p>
-    <p>design shamefully inspired from <a href="http://becausewesayso.co.uk">becausewesayso.co.uk</a></p>
+    <p>design inspired from <a href="http://becausewesayso.co.uk">becausewesayso.co.uk</a></p>
     <p>social icons provided by <a href="http://sixrevisions.com/freebies/icons/social-sketches-exclusive-free-hand-sketched-icon-set/">An Phan Văn</a></p>
    </div>
    <div class="separator">❧</div>
    <div id="like" class="box">
-    <p>{{likes}} «coffee» lovers<br /><b>are you?</b></p>
-    <a href="/like/"><div id="heart"><span>heart it ♥</span></div></a>
+    <p>{{likes}} «coffee» lovers<br />
+    {% if like %}
+      <b>just like you</b></p>
+      <div id="heart-fill" class="heart"><span>heart it ♥</span></div>
+    {% else %}
+      <b>are you?</b></p>
+      <a href="/like/"><div id="heart-empty" class="heart"><span>heart it ♥</span></div></a>
+    {% endif %}
    </div>
 
    <div id="follow" class="box social">

@@ -48,7 +48,9 @@ input:focus{border-color: #DB5C6B;}
 form label{width: 40px; display:block; float:left; padding-top: 4px;}
 .button{padding: 8px 20px; float:right; font-weight: bold; font-size: 14px; color:white; cursor:pointer; border: solid 1px #E2E2E2; background-color: #DB5C6B;}
 #form button{float:right; color:#333; margin-top: -5px;}
+#form button:disabled{ color:#999; }
 #submit-line{padding: 4px 0px;}
+.alert{color: #A00; margin-right: 6px;}
 
 
 #footer{/*width:72px;*/ padding 12px 12px; margin:70px 0px 30px 80px; clear:both;}
@@ -66,9 +68,11 @@ form label{width: 40px; display:block; float:left; padding-top: 4px;}
 .social{padding:0px 20px 20px 20px;}
 .social img{margin: 8px 12px;}
 #about a{color: #DB5C6B; font-style: normal; font-weight: bold;}
-#heart{height: 100px; background-image:url(images/heart-empty.png); background-position: center; background-repeat:no-repeat;}
-#heart:hover{background-image:url(images/heart.png)}
-#heart span{display:none;}
+.heart{height: 100px; background-position: center; background-repeat:no-repeat;}
+.heart span{display:none;}
+#heart-empty{background-image:url(images/heart-empty.png); }
+#heart-empty:hover{background-image:url(images/heart_lighter.png)}
+#heart-fill{background-image:url(images/heart_lighter.png); }
 
 a #heart:{text-decoration: none;}
 #heart span{font-size:90px; color:#424242;}

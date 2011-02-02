@@ -8,6 +8,8 @@ from datetime import datetime
 import re
 import model
 import uuid
+import logging
+from cookies import Cookies
 
 def base_host():
     config = ConfigParser.RawConfigParser()
@@ -36,6 +38,17 @@ def get_likes():
 
 class Like(webapp.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        if user:
+            user_prefs = model.UserPrefs.all().filter("user =", user).get()
+            if not user_prefs: user_prefs = model.UserPrefs(user=user)
+            if user_prefs.like: redirect('/')
+            user_prefs.like = True
+            user_prefs.put()
+        else:
+            cookies = Cookies(self,max_age=180)
+            cookies['like'] = '1'
+
         l = get_likes()
         l.value += 1
         l.put()
@@ -48,18 +61,41 @@ class MainPage(webapp.RequestHandler):
             page = 1
         self.response.headers['Content-Type'] = 'text/html'
         dedications = db.GqlQuery("SELECT * FROM Dedication WHERE deleted=False ORDER BY pub_date DESC LIMIT 10")
+        user = users.get_current_user()
         template_values = {
             'dedications': dedications,
             'likes': get_likes().value,
+            'user': user
             }
         if users.is_current_user_admin():
             template_values['delete_links'] = True
+
+        if user:
+            user_prefs = model.UserPrefs.all().filter("user =", user).get()
+            if user_prefs: template_values['like'] = user_prefs.like
+
+        cookies = Cookies(self)
+        if cookies['like']: template_values['like'] = True
+
+
+
         path = os.path.join(os.path.dirname(__file__), 'main.tmpl')
         self.response.out.write(template.render(path, template_values))
 
 class AddDedication(webapp.RequestHandler):
     def post(self):
-        if self.request.get('body') and self.request.get('from_name') and self.request.get('to_name'):
+        body = self.request.get('body')
+        from_name = self.request.get('from_name')
+        to_name = self.request.get('to_name')
+
+        valid = (body and
+                 15 <= len(body) <= 360 and
+                 from_name and
+                 0 < len(from_name) <= 40 and
+                 to_name and
+                 0 < len(from_name) <= 40)
+
+        if valid:
             ded = model.Dedication(key_name = str(uuid.uuid4())[:5],
                                    body = self.request.get('body'),
                                    from_name = self.request.get('from_name'),
