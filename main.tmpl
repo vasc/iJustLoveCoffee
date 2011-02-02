@@ -2,24 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>I love Coffee</title>
+<title>iJustLoveCoffee</title>
 <link href="/media/style.css" rel="stylesheet" type="text/css" />
-<link rel="icon" href="/media/images/favicon.ico" /> 
+<link rel="icon" href="/media/images/favicon.ico" />
+<script type="text/javascript" src="http://use.typekit.com/cdm8jra.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
- <div id="header"><a href="/"><div id="logo">iJustLoveCoffee</div></a><a href="#dedication-form"><div id="dedicate-button">Dedicate it to a special someone »</div></a></div> 
+ <div id="header">
+   <div id="menu">
+    sign in with <a href="/signin/"><em>google</em></a>
+   </div>
+   <div id="badge">
+     <a href="/">
+       <div id="logo">iJustLoveCoffee</div>
+     </a>
+     <a href="#dedication-form">
+       <div id="dedicate-button">Dedicate it to a special someone »</div>
+     </a>
+   </div>
+ </div>
  <div id="wrapper">
   <div id="main">
    <div id="coffee">
     {% if single %}
      <div class="wall">
       <div class="dedication box">
-       <p>to <span class="to">{{ single.to_name|escape }}</span> from <em>{{ single.from_name|escape }}</em> <span class="extra">{{ single.print_date }}</span></p>
+       <p>to <span class="to">{{ single.to_name|escape }}</span> from <em>{{ single.from_name|escape }}</em> <span class="extra r">{{ single.print_date }}</span></p>
        <p>{{ single.body|escape }}</p>
        <p class="extra">
-        {% if delete_links %}<a href="/delete/{{ single.key }}/{{ single.secret }}/">delete</a> | {% endif %}
-        <a href="#">retweet</a> | 
-        <a href="/d/{{ single.key }}/{{ single.to_name|escape }}/">dedication link</a></p>
+        {% if delete_links %}<a href="/delete/{{ single.key.name }}/{{ single.secret }}/">delete</a> | {% endif %}
+        <a href="#">tweet</a> |
+        <a href="/d/{{ single.key.name }}/{{ single.to_name|escape }}/">dedication link</a></p>
        <div class="blank"></div>
       </div>
      </div>
@@ -29,9 +43,9 @@
      <li>Coffee is Hot</li>
      <li>Coffee Makes me <em>Excited</em></li>
      <li>Coffee is good enough to have <em>every Day</em></li>
-     <li>Coffee Smell Good</li>
+     <li>Coffee Smells Good</li>
      <li>Coffee makes you nervous Sometimes</li>
-     <li>Coffee Gives you Worm &amp; Fuzzies</li>
+     <li>Coffee gives you Warm &amp; Fuzzies</li>
      <li>Even when Coffee is too <em>strong or too weak</em>, It's Still Good.</li>
     </ul>
     <h1><em>Things</em> I Like About <em>You</em></h1>
@@ -41,15 +55,20 @@
     </ul>
    </div>
    <div class="wall">
+    <!--<div id="disqus_thread"></div>
+    <script src="/media/disqus.js" type="text/javascript"></script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    -->
     {% if dedications %}
      {% for dedication in dedications%}
       <div class="dedication box">
-       <p>to <span class="to">{{dedication.to_name|escape}}</span> from <em>{{dedication.from_name|escape}}</em> <span class="extra">{{dedication.print_date}}</span></p>
+       <p>to <span class="to">{{dedication.to_name|escape}}</span> from <em>{{dedication.from_name|escape}}</em> <span class="extra r">{{dedication.print_date}}</span></p>
        <p>{{dedication.body|escape}}</p>
-       <p class="extra">
-        {% if delete_links %}<a href="/delete/{{dedication.key}}/{{dedication.secret}}/">delete</a> | {% endif %}
-        <a href="#">retweet</a> | 
-        <a href="/d/{{dedication.key}}/{{dedication.to_name|escape}}/">dedication link</a></p>
+       <p class="extra negmargin">
+        {% if delete_links %}<a href="/delete/{{dedication.key.name}}/{{dedication.secret}}/">delete</a> | {% endif %}
+        <a href="#">tweet</a> |
+        <a href="/d/{{dedication.key.name}}/{{dedication.to_name|escape}}/">dedication link</a></p>
        <div class="blank"></div>
       </div>
      {% endfor %}
@@ -66,7 +85,7 @@
      <div class="blank"></div>
     </div>
    </div>
-  </div> 
+  </div>
   <div id="sidebar">
    <div id="about" class="box">
     <p><b>about:</b></p>
@@ -74,28 +93,32 @@
     <p>design shamefully inspired from <a href="http://becausewesayso.co.uk">becausewesayso.co.uk</a></p>
     <p>social icons provided by <a href="http://sixrevisions.com/freebies/icons/social-sketches-exclusive-free-hand-sketched-icon-set/">An Phan Văn</a></p>
    </div>
+   <div class="separator">❧</div>
    <div id="like" class="box">
-    <p>{{likes}} people like «coffee»</p>
+    <p>{{likes}} «coffee» lovers<br /><b>are you?</b></p>
     <a href="/like/"><div id="heart"><span>heart it ♥</span></div></a>
-    <p><b>do you?</b></p>
    </div>
+
    <div id="follow" class="box social">
     <p><b>follow:</b></p>
-    <div class="bookmark"><a href="/feed/"><img alt="rss feed" src="/media/images/rss-48.png" title="tweet this!" /><div>feed</div></a></div>
-    <div class="bookmark"><a href="#"><img alt="follow on twitter" src="/media/images/twitter-follow-48.png" title="bookmark this!" /><div>follow</div></a></div>
+    <div class="bookmark"><a href="/feed/"><img alt="rss feed" src="/media/images/rss-48.png" title="follow dedications on your favorite reader!" /><div>feed</div></a></div>
+    <div class="bookmark"><a href="#"><img alt="follow on twitter" src="/media/images/twitter-follow-48.png" title="follow dedications in twitter!" /><div>follow</div></a></div>
     <div class="blank"></div>
    </div>
+
    <div id="share" class="box social">
     <p><b>share:</b></p>
     <div class="bookmark"><a href="http://twitter.com/home?status=i%20really%20love%20coffee%20:)%20http://ijustlovecoffee.com"><img alt="twitter" src="/media/images/twitter-48.png" title="tweet this!" /><div>tweet</div></a></div>
     <div class="bookmark"><a href="http://del.icio.us/post?url=http://ijustlovecoffee.com/&amp;title=I%20Just%20Love%20Coffee"><img alt="delicious" src="/media/images/delicious-48.png" title="bookmark this!" /><div>delicious</div></a></div>
-    <div class="bookmark"><a href="http://www.facebook.com/sharer.php?u=http://ijustlovecoffee.com/&amp;t=I%20Just%20Love%20Coffee"><img alt="facebook" src="/media/images/facebook-48.png" title="update status!" /><div>facebook</div></a></div>
+    <div class="bookmark"><a href="http://www.facebook.com/sharer.php?u=http://ijustlovecoffee.com/&amp;t=I%20Just%20Love%20Coffee"><img alt="facebook" src="/media/images/facebook-48.png" title="share in facebook!" /><div>facebook</div></a></div>
     <div class="bookmark"><a href="http://www.stumbleupon.com/submit?url=http://ijustlovecoffee.com/"><img alt="stumbleupon" src="/media/images/stumbleupon-48.png" title="stumble here!" /><div>stumble</div></a></div>
-    <div class="bookmark"><a href="http://digg.com/submit?phase=2&amp;url=http://ijustlovecoffee.com/"><img alt="digg" src="/media/images/digg-48.png" title="digg this!" /><div>digg</div></a></div>
-    <div class="bookmark"><a href="http://reddit.com/submit?url=http://ijustlovecoffee.com/&amp;title=I%20Just%20Love%20Coffee"><img alt="reddit" src="/media/images/reddit-48.png" title="submit to reddit!" /><div>reddit</div></a></div>
+    <!--<div class="bookmark"><a href="http://digg.com/submit?phase=2&amp;url=http://ijustlovecoffee.com/"><img alt="digg" src="/media/images/digg-48.png" title="digg this!" /><div>digg</div></a></div>
+    <div class="bookmark"><a href="http://reddit.com/submit?url=http://ijustlovecoffee.com/&amp;title=I%20Just%20Love%20Coffee"><img alt="reddit" src="/media/images/reddit-48.png" title="submit to reddit!" /><div>reddit</div></a></div>-->
     <div class="blank"></div>
    </div>
   </div>
+  <div class="blank"></div>
  </div>
 </body>
 </html>
+

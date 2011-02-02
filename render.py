@@ -7,6 +7,7 @@ import random
 from datetime import datetime
 import re
 import model
+import uuid
 
 def base_host():
     config = ConfigParser.RawConfigParser()
@@ -36,7 +37,7 @@ def get_likes():
 class Like(webapp.RequestHandler):
     def get(self):
         l = get_likes()
-        l.value += 100000
+        l.value += 1
         l.put()
         self.redirect('/')
 
@@ -59,7 +60,8 @@ class MainPage(webapp.RequestHandler):
 class AddDedication(webapp.RequestHandler):
     def post(self):
         if self.request.get('body') and self.request.get('from_name') and self.request.get('to_name'):
-            ded = model.Dedication(body = self.request.get('body'),
+            ded = model.Dedication(key_name = str(uuid.uuid4())[:5],
+                                   body = self.request.get('body'),
                                    from_name = self.request.get('from_name'),
                                    to_name = self.request.get('to_name'),
                                    secret = random.randint(1000000, 10000000))
@@ -70,8 +72,8 @@ class Delete(webapp.RequestHandler):
     def get(self, key, secret):
         if users.is_current_user_admin():
             secret = int(secret)
-            ded = db.get(key)
-            if ded.secret == secret:
+            ded = model.Dedication.get_by_key_name(key)
+            if ded and ded.secret == secret:
                 ded.deleted = True
                 ded.put()
         self.redirect('/')
@@ -82,21 +84,24 @@ class SignIn(webapp.RequestHandler):
         if user:
             self.redirect('/')
         else:
-            self.redirect(users.create_login_url(self.request.uri))
+            self.redirect(users.create_login_url('/'))#self.request.uri))
 
 class SignOut(webapp.RequestHandler):
-    def get(self):    
+    def get(self):
         self.redirect(users.create_logout_url('/'))
 
 class Single(webapp.RequestHandler):
     def get(self, d_id):
         self.response.headers['Content-Type'] = 'text/html'
-        try:
-            key = db.Key(d_id)
-        except:
+        #try:
+        #    key = db.Key(d_id)
+        #except:
+        #    self.redirect('/')
+        #    return
+        single = model.Dedication.get_by_key_name(d_id)
+        if not single:
             self.redirect('/')
             return
-        single = db.get(key)
         path = os.path.join(os.path.dirname(__file__), 'main.tmpl')
         template_values = {
             'single': single,
@@ -125,7 +130,7 @@ def feed(user = None, _pass = None):
     main_file = open('rss_main.tmpl', 'r')
     main = main_file.read()
     item_file = open('rss_items.tmpl', 'r')
-    item = item_file.read()    
+    item = item_file.read()
     dedication_file = open('dedication.tmpl', 'r')
     dedication = dedication_file.read()
     dedication = show_deletion(user, _pass, dedication)
@@ -133,13 +138,13 @@ def feed(user = None, _pass = None):
     cursor = mysql_cursor()
     cursor.execute("SELECT MAX(pub_date) as time FROM dedications")
     time = cursor.fetchone()['time'].strftime("%a, %d %b %Y %H:%M:%S +0000")
-    cursor = mysql_cursor() 
-    cursor.execute("""SELECT * FROM dedications 
+    cursor = mysql_cursor()
+    cursor.execute("""SELECT * FROM dedications
                       WHERE deleted=FALSE
                       ORDER BY id DESC
                       LIMIT 0, 25""")
     for row in cursor:
-        link = 'http://localhost/d/%s/%s/' % (row['id'], row['_to']) 
+        link = 'http://localhost/d/%s/%s/' % (row['id'], row['_to'])
         values = {'content': Template(dedication).safe_substitute(row), 'link': link}
         values.update(row)
         values['pub_date'] = values['pub_date'].strftime("%a, %d %b %Y %H:%M:%S +0000")
@@ -178,8 +183,9 @@ def page_404():
     print 'Status: 404 Not Found'
     send_html(page_404)
 
-    
+
 def send_html(name, type = "text/html"):
     print 'Content-type: ' + type
     print
     print str(name)
+

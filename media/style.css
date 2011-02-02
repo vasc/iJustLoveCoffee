@@ -1,5 +1,7 @@
+@font-face{font-family:'Libertine'; src:url('/media/libertine_re.ttf'); font-weight: normal;}
+@font-face{font-family:'Libertine'; src:url('/media/libertine_bd.ttf'); font-weight: bold;}
 
-body{font-family: Georgia, sans; font-size: 1em; color: #424242; /*background-image: url(images/bg.jpg);*/ background-color:#F8F8F8; font-variant: small-caps;}
+body{font-family: Libertine, Georgia, sans; font-size: 1.3em; color: #222; /*background-image: url(images/bg3.jpg);*/ background-color:#FFF; /*font-variant: small-caps;*/}
 a{color:inherit; text-decoration: inherit;}
 h1{margin: 30px 0px; clear:both;}
 ul{list-style-type: none; padding: 0px; margin: 0 0 0 12px;}
@@ -7,7 +9,9 @@ em{color: #DB5C6B; font-style: normal; font-weight: bold;}
 a img{border-width: 0px}
 .blank{clear:both;}
 
-#header{margin:30px 0px 30px 80px;  float:left; color:#FFF; font-weight:bold; font-variant: normal;}
+#header{padding: 30px 80px 0 80px; }
+#badge{margin:0px 0px 30px 0px; float:left; color:#FFF; font-weight:bold; font-variant: normal;}
+#menu{float: right; font-size: 0.7em; color: #727272;}
 #logo{
   padding:12px 20px 8px 44px;
   background-color: #424242;
@@ -24,20 +28,23 @@ a img{border-width: 0px}
   font-size: 0.7em;
 }
 
-#wrapper{clear:left; margin: 0 auto; width: 755px;}
+#wrapper{clear:left; margin: 20px auto; width: 867px;}
 #main{margin:10px 0px 30px 0px; float:left;}
 #coffee{margin-bottom: 60px;}
-.wall{width: 545px;}
-.wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 24px;}
+#coffee h1:first-child{margin-top: 0;}
+.wall{width: 545px; /*font-size: 0.7em;*/ font-family: Helvetica, sans; font-variant: normal;}
+.wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 48px;}
 .wall .dedication .to{font-weight:bold;}
-.wall .dedication .extra{float:right; font-size:0.8em; color: #828282;}
+.wall .dedication .r{float:right;}
+.wall .dedication .negmargin{margin-top: -6px;}
+.wall .dedication .extra{font-size:0.8em; color: #828282;}
 .wall .dedication .extra a{text-decoration: none; color: #727272; font-weight:bold;}
 .wall .dedication .extra a:hover{text-decoration: underline;}
 /*#wall .dedication.box:hover{background-color:#E9E9E9;}*/
 
 input, textarea{border: solid 1px #E2E2E2; font-weight: normal; font-size: 11px;}
-textarea{resize: vertical;} 
-input:focus{border-color: #DB5C6B;} 
+textarea{resize: vertical;}
+input:focus{border-color: #DB5C6B;}
 form label{width: 40px; display:block; float:left; padding-top: 4px;}
 .button{padding: 8px 20px; float:right; font-weight: bold; font-size: 14px; color:white; cursor:pointer; border: solid 1px #E2E2E2; background-color: #DB5C6B;}
 #form button{float:right; color:#333; margin-top: -5px;}
@@ -52,9 +59,10 @@ form label{width: 40px; display:block; float:left; padding-top: 4px;}
 .bookmark a{text-decoration:none; color: #727272;}
 .bookmark a:hover{font-weight:bold;}
 
-#sidebar{width: 150px; margin-left:60px; float:left;}
-#sidebar .box{width:150px;}
-.box{background-color:#F4F4F4; border: solid 1px #E2E2E2; color: #727272; padding: 0px 20px; font-variant:normal; font-size: 0.7em; margin-bottom:24px;}
+#sidebar{width: 167px; margin-left:60px; float:left;}
+#sidebar .box{width:167px;}
+#sidebar .separator{width: 1em; margin: 0 auto;}
+.box{/*background-color:#FBFBFB; border: solid 1px #E2E2E2;*/ color: #727272; padding: 0px 20px; font-variant:normal; font-size: 0.8em; margin-bottom: 24px;}
 .social{padding:0px 20px 20px 20px;}
 .social img{margin: 8px 12px;}
 #about a{color: #DB5C6B; font-style: normal; font-weight: bold;}
