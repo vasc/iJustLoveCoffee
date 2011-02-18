@@ -11,18 +11,19 @@ class MainPage(webapp.RequestHandler):
         self.response.out.write(test)
 
 
-application = webapp.WSGIApplication([('/', render.MainPage), 
-                                      ('/page/(\d+)/', render.MainPage), 
-                                      ('/d/(\w+)/\w+/', render.Single), 
-                                      ('/feed/', render.Feed), 
+application = webapp.WSGIApplication([('/', render.MainPage),
+                                      ('/page/(\d+)/', render.MainPage),
+                                      ('/d/(\w+)/\w+/', render.Single),
+                                      ('/feed/', render.Feed),
                                       ('/signin/', render.SignIn),
                                       ('/signout/', render.SignOut),
                                       ('/delete/(\w+)/(\d+)/', render.Delete),
                                       ('/like/', render.Like),
-                                      ('/add-dedication/', render.AddDedication)], debug=True)
+                                      ('/add-dedication/', render.AddDedication)], debug=False)
 
 def main():
     run_wsgi_app(application)
 
 if __name__ == "__main__":
     main()
+

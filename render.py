@@ -46,7 +46,7 @@ class Like(webapp.RequestHandler):
             user_prefs.like = True
             user_prefs.put()
         else:
-            cookies = Cookies(self,max_age=180)
+            cookies = Cookies(self,max_age=60*60*24*365)
             cookies['like'] = '1'
 
         l = get_likes()

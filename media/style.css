@@ -1,13 +1,14 @@
 @font-face{font-family:'Libertine'; src:url('/media/libertine_re.ttf'); font-weight: normal;}
 @font-face{font-family:'Libertine'; src:url('/media/libertine_bd.ttf'); font-weight: bold;}
 
-body{font-family: Libertine, Georgia, sans; font-size: 1.3em; color: #222; /*background-image: url(images/bg3.jpg);*/ background-color:#FFF; /*font-variant: small-caps;*/}
+body{font-family: "museo-sans-1","museo-sans-2",sans-serif; font-size: 1.3em; color: #323232; /*background-image: url(images/bg3.jpg);*/ background-color:#FFF; /*font-variant: small-caps;*/}
 a{color:inherit; text-decoration: inherit;}
 h1{margin: 30px 0px; clear:both;}
 ul{list-style-type: none; padding: 0px; margin: 0 0 0 12px;}
-em{color: #DB5C6B; font-style: normal; font-weight: bold;}
+#dedication span.emph, em{color: #DB5C6B; font-style: normal; font-weight: bold;}
 a img{border-width: 0px}
-.blank{clear:both;}
+.blank{clear:both !important; float:none !important;}
+
 
 #header{padding: 30px 80px 0 80px; }
 #badge{margin:0px 0px 30px 0px; float:left; color:#FFF; font-weight:bold; font-variant: normal;}
@@ -28,10 +29,47 @@ a img{border-width: 0px}
   font-size: 0.7em;
 }
 
+.google{background: transparent url('/media/images/google-18.png') no-repeat left center; padding-left: 20px;}
+
 #wrapper{clear:left; margin: 20px auto; width: 867px;}
-#main{margin:10px 0px 30px 0px; float:left;}
+#main{margin:10px 0px 30px 0px; float:left; width: 640px;}
 #coffee{margin-bottom: 60px;}
-#coffee h1:first-child{margin-top: 0;}
+#coffee li:first-child h1{margin-top: 0;}
+#coffee li h1{margin-left: -12px;}
+
+#toolbar{font-size: 0.7em; margin-bottom: 18px; color: #727272}
+#toolbar .button{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #727272;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    vertical-align: top;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+}
+#toolbar .button.grey{background-color: #424242;}
+#toolbar .button.pink{background-color: #DB5C6B;}
+#toolbar .button.letter {
+  background-color: #FBFBFB;
+  color: #424242;
+  font-size: 0.9em;
+  font-weight: bold;
+  height: 17px;
+  padding-left: 4px;
+  padding-top: 1px;
+}
+#toolbar .button.letter span{font-size: 0.7em;}
+
+#dedication div{margin-left: 12px; float: left; clear: both;}
+#dedication div.heading{margin: 30px 0; font-size: 2em; font-weight: bold; }
+#dedication.formatting div{ margin-left: -8px; padding-left: 20px; cursor: pointer;}
+#dedication.formatting div.heading{ margin-left: -20px; padding-left: 20px; cursor: pointer;}
+#dedication.formatting div:hover{ background: transparent url('/media/images/plus.png') no-repeat left center; }
+#dedication.formatting div.heading:hover{ background: transparent url('/media/images/minus.png') no-repeat left center; }
+#dedication div.heading:first-child{margin-top: 0;}
+
 .wall{width: 545px; /*font-size: 0.7em;*/ font-family: Helvetica, sans; font-variant: normal;}
 .wall .dedication{color: #727272; font-variant:normal; font-size: 0.7em; margin-bottom: 48px;}
 .wall .dedication .to{font-weight:bold;}
@@ -46,7 +84,7 @@ input, textarea{border: solid 1px #E2E2E2; font-weight: normal; font-size: 11px;
 textarea{resize: vertical;}
 input:focus{border-color: #DB5C6B;}
 form label{width: 40px; display:block; float:left; padding-top: 4px;}
-.button{padding: 8px 20px; float:right; font-weight: bold; font-size: 14px; color:white; cursor:pointer; border: solid 1px #E2E2E2; background-color: #DB5C6B;}
+#form .button{padding: 8px 20px; float:right; font-weight: bold; font-size: 14px; color:white; cursor:pointer; border: solid 1px #E2E2E2; background-color: #DB5C6B;}
 #form button{float:right; color:#333; margin-top: -5px;}
 #form button:disabled{ color:#999; }
 #submit-line{padding: 4px 0px;}

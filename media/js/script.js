@@ -1,5 +1,107 @@
+function splitandspan(){
+    //find all text in divs, wrap in spans
+    $('#dedication>div').contents().filter(function(){return this.nodeType==3}).wrap('<span />');
+
+    //flatten all spans and split them
+    var re = new RegExp(String.fromCharCode(160), "g");
+
+    $('#dedication>div>span').each(function(){
+        $(this).text($(this).text());
+        var parent = $(this);
+        var values = parent.text().split(' ');
+        if(values.length == 0) return;
+        var hasclass = parent.hasClass('emph');
+        for(var val in values){
+            if(values[val] == '') continue;
+            values[val] = values[val].replace(re, " ");
+
+            var new_node = $('<span>' + values[val] + '</span>');
+            if(hasclass){ new_node.addClass('emph'); }
+
+            parent.before(new_node);
+            new_node.after(' ');
+        }
+        parent.remove();
+    });
+
+/*    var parent = $(this).parent().filter('span');
+    var divtext = $(this).wrap('<span />').parent();
+    var values = divtext.text().split(' ');
+    var hasclass = parent.hasClass('emph');
+    for(var val in values){
+        if(values[val] == '') continue;
+
+        var new_node = $('<span>' + values[val] + ' </span>');
+        if(hasclass) new_node.addClass('emph');
+
+        if(parent.length > 0){
+            parent.before(new_node);
+        }
+        else{
+            divtext.before(new_node);
+        }
+    }
+    //$(divtext).parent().parent().filter('span').remove();
+
+    $(divtext).remove();*/
+}
+
+
 $(document).ready(function(){
+
+   //$('#toolbar').buttonset();
+   //$('#radio1').button({'icons':  {primary: "ui-icon-pencil"}});
+   //$('#radio2').button({'icons':  {primary: "ui-icon-wrench"}});
+   		$( ".color-button" ).draggable({revert: "invalid"});
+   		$( "#dedication .span").dropable();
+   splitandspan();
+
+
+   //Likes preloading
    $('<img/>')[0].src = '/media/images/heart_lighter.png';
+
+   //edit dedication
+   $('#radio1').click(function(){
+      $('#dedication').attr('contenteditable', 'true');
+      $('#dedication').removeClass('formatting');
+      $('#dedication').addClass('editing');
+      $('#dedication').focus();
+   });
+   $('#radio2').click(function(){
+      $('#dedication').removeAttr('contenteditable');
+      $('#dedication').addClass('formatting');
+      $('#dedication').removeClass('editing');
+
+
+      splitandspan();
+   });
+
+   /*$('#dedication.editing').live('keyup', function(e){
+       console.log(e.keyCode);
+       if (e.keyCode == '13') {
+           splitandspan();
+       }
+   });*/
+
+
+   //format dedication
+   $('#dedication.formatting div').live('click', function(){
+       splitandspan();
+       $(this).toggleClass('heading');
+       return false;
+   });
+   $('#dedication.formatting span').live('keyup', function(){
+      splitandspan();
+   });
+
+   $('#dedication.formatting span').live('click', function(){
+      $(this).toggleClass('emph');
+      return false;
+   });
+
+
+
+   //Comment validator
    validator = function(){
       var chars = 360 - $('#form textarea').val().length;
       $('#chars').text(chars);

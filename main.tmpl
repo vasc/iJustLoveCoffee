@@ -4,15 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>iJustLoveCoffee</title>
 <link href="/media/style.css" rel="stylesheet" type="text/css" />
+<link href="/media/jqueryui/jquery-ui-1.8.9.custom.css" rel="stylesheet" type="text/css" />
 <link rel="icon" href="/media/images/favicon.ico" />
+
+<script type="text/javascript" src="http://use.typekit.com/cdm8jra.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/media/js/script.js"></script>
 </head>
 <body>
+
  <div id="header">
    <div id="menu">
    {% if not user %}
-    sign in with <a href="/signin/"><em>google</em></a>
+    sign in with <a href="/signin/"><em class="google">google</em></a>
    {% else %}
     hi {{ user.nickname }}, <a href="/signout/"><em>sign out</em> if you must :(</a>
    {% endif %}
@@ -42,21 +49,41 @@
       </div>
      </div>
     {% endif %}
-    <h1><b>T</b>hings I <em>Like About Coffee</em></h1>
-    <ul>
+     <div id="toolbar">
+		  <!--<input type="radio" id="radio1" name="radio" class="edit" /><label for="radio1">Edit</label>
+		  <input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2">Format</label>-->
+		  <div class="button grey"></div>
+		  <div class="button pink"></div>
+		  <div class="button letter">A<span>A</span></div>
+
+    </div>
+    <div id="dedication" class="formatting editing" contenteditable>
+     <div class="heading"><span>Things</span> <span>I</span> <span class="emph">Like</span> <span class="emph">About</span> <span class="emph">Coffee</span> </div>
+     <div><span>Coffee</span> <span>is</span> <span>Hot</span> </div>
+     <div><span>Coffee</span> <span>Makes</span> <span>me</span> <span class="emph">Excited</span> </div>
+     <div><span>Coffee</span> <span>is</span> <span>good</span> <span>enough</span> <span>to</span> <span>have</span> <span class="emph">every</span> <span class="emph">Day</span> </div>
+     <div><span>Coffee</span> <span>Smells</span> <span>Good</span> </div>
+     <div><span>Coffee</span> <span>makes</span> <span>you</span> <span>nervous</span> <span>Sometimes</span> </div>
+     <div><span>Coffee</span> <span>gives</span> <span>you</span> <span>Warm</span> <span>&amp;</span> <span>Fuzzies</span> </div>
+     <div><span>Even</span> <span>when</span> <span>Coffee</span> <span>is</span> <span>too</span> <span class="emph">strong</span> <span class="emph">or</span> <span class="emph">too</span> <span class="emph">weak</span> <span>,</span> <span>It's</span> <span>Still</span> <span>Good.</span> </div>
+     <div class="heading"><span class="emph">Things</span> <span>I</span> <span>Like</span> <span>About</span> <span class="emph">You</span> </div>
+     <div><span>Pretty</span> <span>much</span> <span class="emph">the</span> <span class="emph">Same</span> <span class="emph">as</span> <span class="emph">Coffee</span> </div>
+     <div><span>And</span> <span>who</span> <span>knows,</span> <span>Maybe</span> <span class="emph">you</span> <span>Taste</span> <span>Good</span> <span>&amp;</span> <span>keep</span> <span>me</span> <span>up</span> <span>all</span> <span>Night,</span> <span>too.</span> </div>
+     <div class="blank"></div>
+    </div>
+    <!--<ul>
+     <li><h1>Things I <em>Like</em> <em>About</em> <em>Coffee</em></h1></li>
      <li>Coffee is Hot</li>
      <li>Coffee Makes me <em>Excited</em></li>
-     <li>Coffee is good enough to have <em>every Day</em></li>
+     <li>Coffee is good enough to have <em>every</em> <em>Day</em></li>
      <li>Coffee Smells Good</li>
      <li>Coffee makes you nervous Sometimes</li>
      <li>Coffee gives you Warm &amp; Fuzzies</li>
-     <li>Even when Coffee is too <em>strong or too weak</em>, It's Still Good.</li>
-    </ul>
-    <h1><em>Things</em> I Like About <em>You</em></h1>
-    <ul>
-     <li>Pretty much <em>the Same as Coffee</em></li>
+     <li>Even when Coffee is too <em>strong</em> <em>or</em> <em>too</em> <em>weak</em>, It's Still Good.</li>
+     <li><h1><em>Things</em> I Like About <em>You</em></h1></li>
+     <li>Pretty much <em>the</em> <em>Same</em> <em>as</em> <em>Coffee</em></li>
      <li>And who knows, Maybe <em>you</em> Taste Good &amp; keep me up all Night, too.</li>
-    </ul>
+    </ul>-->
    </div>
    <div class="wall">
     <!--<div id="disqus_thread"></div>
@@ -91,7 +118,7 @@
      <div class="blank"></div>
     </div>
     {% else %}
-    <div class="dedication box">sign in with <a href="/signin/"><em>google</em></a> to write your own dedication</div>
+    <div class="dedication box">sign in with <a href="/signin/"><em class="google">google</em></a> to write your own dedication</div>
     {% endif %}
    </div>
   </div>
@@ -122,6 +149,7 @@
    </div>
 
    <div id="share" class="box social">
+
     <p><b>share:</b></p>
     <div class="bookmark"><a href="http://twitter.com/home?status=i%20really%20love%20coffee%20:)%20http://ijustlovecoffee.com"><img alt="twitter" src="/media/images/twitter-48.png" title="tweet this!" /><div>tweet</div></a></div>
     <div class="bookmark"><a href="http://del.icio.us/post?url=http://ijustlovecoffee.com/&amp;title=I%20Just%20Love%20Coffee"><img alt="delicious" src="/media/images/delicious-48.png" title="bookmark this!" /><div>delicious</div></a></div>
